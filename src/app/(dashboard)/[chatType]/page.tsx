@@ -7,8 +7,6 @@ type ChatTypePageProps = {
 };
 
 const ChatTypePage = ({ params }: ChatTypePageProps) => {
-  console.info(params);
-
   const allowedChatType = [
     'conversation',
     'image_generation',
@@ -17,9 +15,7 @@ const ChatTypePage = ({ params }: ChatTypePageProps) => {
     'image_analysis',
   ];
 
-  if (!allowedChatType.includes(params.chatType)) {
-    return notFound();
-  }
+  if (!allowedChatType.includes(params.chatType)) return notFound();
 
   return <div>ChatTypePage</div>;
 };
