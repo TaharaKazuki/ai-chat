@@ -1,6 +1,7 @@
 'use client';
 
 import {
+  Ellipsis,
   FileImage,
   FileOutput,
   FileSearch2,
@@ -11,6 +12,12 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 import BotAvatar from '@/components/BotAvatar';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import { cn } from '@/lib/utils';
 
 const routes = [
@@ -48,12 +55,19 @@ const routes = [
 
 const Sidebar = () => {
   const pathname = usePathname();
+
+  const handleDeleteChat = async (chatId: string) => {
+    console.info('chatId', chatId);
+  };
+
   return (
-    <div className="h-screen bg-gray-900 p-3 text-white">
-      <div className="flex flex-row items-center gap-3">
-        <BotAvatar />
+    <div className="flex h-screen flex-col space-y-4 bg-gray-900 p-3 text-white">
+      <Link href="/" className="flex items-center">
+        <div className="mr-3 pl-3">
+          <BotAvatar />
+        </div>
         <h1 className="text-xl font-bold">AI Chat App</h1>
-      </div>
+      </Link>
       <div className="mt-3 space-y-1">
         {routes.map((route) => (
           <Link
@@ -70,6 +84,32 @@ const Sidebar = () => {
             </div>
           </Link>
         ))}
+      </div>
+
+      <div className="flex flex-1 flex-col space-y-1 overflow-hidden">
+        <h2 className="px-2 py-4 text-xs font-medium">Chat Room</h2>
+        <div className="overflow-auto">
+          <Link
+            href={''}
+            className={cn(
+              'block p-3 text-sm font-medium text-zinc-400 hover:text-white hover:bg-white/10 transition rounded-lg'
+            )}
+          >
+            <div className="flex flex-row items-center justify-between">
+              <p className="truncate font-medium">message</p>
+              <DropdownMenu>
+                <DropdownMenuTrigger>
+                  <Ellipsis size={16} />
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem onClick={() => handleDeleteChat('')}>
+                    削除
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
+          </Link>
+        </div>
       </div>
     </div>
   );
