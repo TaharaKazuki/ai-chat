@@ -97,12 +97,14 @@ const Sidebar = () => {
 
   return (
     <div className="flex h-screen flex-col space-y-4 bg-gray-900 p-3 text-white">
+      {/* Title & Logo */}
       <Link href="/" className="flex items-center">
         <div className="mr-3 pl-3">
           <BotAvatar />
         </div>
         <h1 className="text-xl font-bold">AI Chat App</h1>
       </Link>
+      {/* ChatRoom Type */}
       <div className="mt-3 space-y-1">
         {routes.map((route) => (
           <Link
@@ -120,30 +122,34 @@ const Sidebar = () => {
           </Link>
         ))}
       </div>
-
+      {/* ChatRoom Area */}
       <div className="flex flex-1 flex-col space-y-1 overflow-hidden">
         <h2 className="px-2 py-4 text-xs font-medium">Chat Room</h2>
         <div className="overflow-auto">
-          <Link
-            href={''}
-            className={cn(
-              'block p-3 text-sm font-medium text-zinc-400 hover:text-white hover:bg-white/10 transition rounded-lg'
-            )}
-          >
-            <div className="flex flex-row items-center justify-between">
-              <p className="truncate font-medium">message</p>
-              <DropdownMenu>
-                <DropdownMenuTrigger>
-                  <Ellipsis size={16} />
-                </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  <DropdownMenuItem onClick={() => handleDeleteChat('')}>
-                    削除
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </div>
-          </Link>
+          {chatRooms.map((room) => (
+            <Link
+              href={`/${room.type}/${room.id}`}
+              key={room.id}
+              className={cn(
+                'block p-3 text-sm font-medium text-zinc-400 hover:text-white hover:bg-white/10 transition rounded-lg',
+                pathname === `/${room.type}/${room.id}` && 'bg-white/10'
+              )}
+            >
+              <div className="flex flex-row items-center justify-between">
+                <p className="truncate font-medium">{room.first_message}</p>
+                <DropdownMenu>
+                  <DropdownMenuTrigger>
+                    <Ellipsis size={16} />
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent>
+                    <DropdownMenuItem onClick={() => handleDeleteChat(room.id)}>
+                      削除
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </div>
+            </Link>
+          ))}
         </div>
       </div>
     </div>
