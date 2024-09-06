@@ -25,13 +25,9 @@ const UserIcon = () => {
   }, [currentUser, router]);
 
   const handleLogout = () => {
-    signOut(auth)
-      .then(() => {
-        router.push('/login');
-      })
-      .catch((error) => {
-        console.info(error);
-      });
+    signOut(auth).catch((error) => {
+      console.info(error);
+    });
   };
 
   return (
