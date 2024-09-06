@@ -1,7 +1,13 @@
 'use client';
 
 import { User } from 'firebase/auth';
-import { createContext, type ReactNode, useEffect, useState } from 'react';
+import {
+  createContext,
+  type ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 
 import { auth } from '@/lib/firebase/firebaseClient';
 
@@ -36,4 +42,10 @@ export const AuthContextProvider = ({ children }: AuthContextProps) => {
       {!isLoading && children}
     </AuthContext.Provider>
   );
+};
+
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (context === undefined) throw new Error('context error');
+  return context;
 };
