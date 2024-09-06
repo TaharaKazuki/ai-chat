@@ -1,3 +1,4 @@
+import Navbar from '@/components/Navbar';
 import Sidebar from '@/components/Sidebar';
 
 export default function DashboardLayout({
@@ -10,7 +11,10 @@ export default function DashboardLayout({
       <div className="hidden bg-red-400 lg:block lg:w-1/4">
         <Sidebar />
       </div>
-      <main className="w-screen bg-blue-400 lg:w-3/4">{children}</main>
+      <main className="w-screen bg-blue-400 lg:w-3/4">
+        <Navbar />
+        {children}
+      </main>
     </div>
   );
 }
