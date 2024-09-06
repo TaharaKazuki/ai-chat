@@ -17,7 +17,7 @@ const LoginPage = () => {
       });
   };
 
-  return <Button onClick={handleLogin}>page</Button>;
+  return <Button onClick={handleLogin}>Login</Button>;
 };
 
 export default LoginPage;
