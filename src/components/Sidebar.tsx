@@ -19,6 +19,17 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { cn } from '@/lib/utils';
+import { useEffect, useState } from 'react';
+import {
+  collection,
+  onSnapshot,
+  orderBy,
+  query,
+  where,
+} from 'firebase/firestore';
+import { db } from '@/lib/firebase/firebaseClient';
+import { useAuth } from '@/app/context/AuthContext';
+import { ChatRoom } from '@/types';
 
 const routes = [
   {
@@ -54,7 +65,31 @@ const routes = [
 ];
 
 const Sidebar = () => {
+  const [chatRooms, setChatRooms] = useState<ChatRoom[]>([]);
   const pathname = usePathname();
+
+  const { currentUser } = useAuth();
+
+  useEffect(() => {
+    const q = query(
+      collection(db, 'chats'),
+      where('user_id', '==', currentUser?.uid),
+      orderBy('last_updated', 'desc')
+    );
+
+    const unsubscribe = onSnapshot(q, (snapShot) => {
+      const fetchChatRooms = snapShot.docs.map((doc) => ({
+        id: doc.id,
+        type: doc.data().type,
+        user_id: doc.data().user_id,
+        last_updated: doc.data().last_updated,
+        first_message: doc.data().first_message,
+      }));
+      setChatRooms(fetchChatRooms);
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   const handleDeleteChat = async (chatId: string) => {
     console.info('chatId', chatId);
