@@ -1,11 +1,11 @@
 'use client';
 import { signInWithPopup } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
+import { useAuth } from '@/app/context/AuthContext';
 import { Button } from '@/components/ui/button';
 import { auth, provider } from '@/lib/firebase/firebaseClient';
-import { useAuth } from '@/app/context/AuthContext';
-import { useEffect } from 'react';
 
 const LoginPage = () => {
   const { currentUser } = useAuth();
@@ -13,7 +13,7 @@ const LoginPage = () => {
 
   useEffect(() => {
     if (currentUser) router.push('/conversation');
-  }, [currentUser]);
+  }, [currentUser, router]);
 
   const handleLogin = () => {
     provider.setCustomParameters({ prompt: 'select_account' });
