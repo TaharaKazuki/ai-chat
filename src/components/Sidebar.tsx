@@ -71,6 +71,7 @@ const Sidebar = () => {
   const { currentUser } = useAuth();
 
   useEffect(() => {
+    if (!currentUser) return;
     const q = query(
       collection(db, 'chats'),
       where('user_id', '==', currentUser?.uid),
