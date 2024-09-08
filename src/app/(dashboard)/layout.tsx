@@ -12,8 +12,10 @@ export default function DashboardLayout({
         <Sidebar />
       </div>
       <main className="w-screen bg-blue-400 lg:w-3/4">
-        <Navbar />
-        {children}
+        <div className="flex h-full flex-col">
+          <Navbar />
+          {children}
+        </div>
       </main>
     </div>
   );

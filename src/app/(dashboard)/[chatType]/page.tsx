@@ -1,5 +1,7 @@
 import { notFound } from 'next/navigation';
 
+import Chat from '@/components/Chat/Chat';
+
 type ChatTypePageProps = {
   params: {
     chatType: string;
@@ -17,7 +19,7 @@ const ChatTypePage = ({ params }: ChatTypePageProps) => {
 
   if (!allowedChatType.includes(params.chatType)) return notFound();
 
-  return <div>ChatTypePage</div>;
+  return <Chat />;
 };
 
 export default ChatTypePage;
