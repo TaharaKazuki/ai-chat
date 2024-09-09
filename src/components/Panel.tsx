@@ -44,7 +44,7 @@ const Panel = ({ chatType }: PanelProps) => {
   return (
     <div className="flex h-full flex-col items-center justify-center">
       <div className="relative size-72">
-        <Image alt="panel image" src={imageUrl} priority></Image>
+        <Image alt="panel image" fill src={imageUrl} priority></Image>
       </div>
       <p className="text-center text-sm text-muted-foreground">{message}</p>
     </div>
