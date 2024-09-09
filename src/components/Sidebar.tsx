@@ -1,6 +1,13 @@
 'use client';
 
 import {
+  collection,
+  onSnapshot,
+  orderBy,
+  query,
+  where,
+} from 'firebase/firestore';
+import {
   Ellipsis,
   FileImage,
   FileOutput,
@@ -10,7 +17,9 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
+import { useAuth } from '@/app/context/AuthContext';
 import BotAvatar from '@/components/BotAvatar';
 import {
   DropdownMenu,
@@ -18,17 +27,8 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { cn } from '@/lib/utils';
-import { useEffect, useState } from 'react';
-import {
-  collection,
-  onSnapshot,
-  orderBy,
-  query,
-  where,
-} from 'firebase/firestore';
 import { db } from '@/lib/firebase/firebaseClient';
-import { useAuth } from '@/app/context/AuthContext';
+import { cn } from '@/lib/utils';
 import { ChatRoom } from '@/types';
 
 const routes = [
@@ -90,6 +90,7 @@ const Sidebar = () => {
     });
 
     return () => unsubscribe();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleDeleteChat = async (chatId: string) => {

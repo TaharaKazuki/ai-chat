@@ -3,10 +3,14 @@ import React from 'react';
 import ChatForm from '@/components/Chat/ChatForm';
 import ChatMessage from '@/components/Chat/ChatMessage';
 
-const Chat = () => {
+type ChatProps = {
+  chatId: string;
+};
+
+const Chat = ({ chatId }: ChatProps) => {
   return (
     <>
-      <ChatMessage />
+      <ChatMessage chatId={chatId} />
       <ChatForm />
     </>
   );

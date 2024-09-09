@@ -1,12 +1,17 @@
 import { notFound } from 'next/navigation';
 
+import Chat from '@/components/Chat/Chat';
+
 type ChatRoomPageProps = {
   params: {
     chatType: string;
+    chatId: string;
   };
 };
 
 const ChatRoomPage = ({ params }: ChatRoomPageProps) => {
+  const { chatId, chatType } = params;
+
   const allowedChatType = [
     'conversation',
     'image_generation',
@@ -15,9 +20,9 @@ const ChatRoomPage = ({ params }: ChatRoomPageProps) => {
     'image_analysis',
   ];
 
-  if (!allowedChatType.includes(params.chatType)) return notFound();
+  if (!allowedChatType.includes(chatType)) return notFound();
 
-  return <div>ChatRoomPage</div>;
+  return <Chat chatId={chatId} />;
 };
 
 export default ChatRoomPage;
