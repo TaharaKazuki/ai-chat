@@ -11,7 +11,7 @@ export default function DashboardLayout({
       <div className="hidden bg-red-400 lg:block lg:w-1/4">
         <Sidebar />
       </div>
-      <main className="w-screen bg-blue-400 lg:w-3/4">
+      <main className="w-screen bg-blue-300 lg:w-3/4">
         <div className="flex h-full flex-col">
           <Navbar />
           {children}
