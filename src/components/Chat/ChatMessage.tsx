@@ -1,39 +1,34 @@
 'use client';
 
-import {
-  query,
-  collection,
-  where,
-  orderBy,
-  onSnapshot,
-} from 'firebase/firestore';
-import React, { useEffect } from 'react';
+import { query, collection, orderBy, onSnapshot } from 'firebase/firestore';
+import React, { useEffect, useState } from 'react';
 
 import BotAvatar from '../BotAvatar';
 import { db } from '@/lib/firebase/firebaseClient';
+import { TextMessage } from '@/types';
 
 type ChatMessageProps = {
   chatId: string;
 };
 
 const ChatMessage = ({ chatId }: ChatMessageProps) => {
-  console.info(chatId);
+  const [messages, setMessages] = useState<TextMessage[]>([]);
+
   useEffect(() => {
     const q = query(
-      collection(db, 'chats'),
-      where('user_id', '==', 'currentUser?.uid'),
-      orderBy('last_updated', 'desc')
+      collection(db, 'chats', chatId, 'messages'),
+      orderBy('created_at', 'asc')
     );
 
     const unsubscribe = onSnapshot(q, (snapShot) => {
-      const fetchChatRooms = snapShot.docs.map((doc) => ({
+      const fetchMessages = snapShot.docs.map((doc) => ({
         id: doc.id,
+        content: doc.data().content,
         type: doc.data().type,
-        user_id: doc.data().user_id,
-        last_updated: doc.data().last_updated,
-        first_message: doc.data().first_message,
+        created_at: doc.data().created_at,
+        sender: doc.data().sender,
       }));
-      // setChatRooms(fetchChatRooms);
+      setMessages(fetchMessages);
     });
 
     return () => unsubscribe();

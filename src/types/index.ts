@@ -7,3 +7,11 @@ export type ChatRoom = {
   first_message: string;
   last_updated: Timestamp;
 };
+
+export type TextMessage = {
+  id: string;
+  content: string;
+  type: string;
+  created_at: Timestamp;
+  sender: 'user' | 'assistant';
+};
