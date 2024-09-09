@@ -11,27 +11,27 @@ const Panel = ({ chatType }: PanelProps) => {
 
     switch (chatType) {
       case 'conversation':
-        imageUrl = '/conversation_panel.svg';
+        imageUrl = '/assets/conversation_panel.svg';
         message = '会話を始めよう';
         break;
 
       case 'image_generation':
-        imageUrl = '/image_generation_panel.svg';
+        imageUrl = '/assets/image_generation_panel.svg';
         message = '画像を生成しよう';
         break;
 
       case 'text_to_speech':
-        imageUrl = '/text_to_speech_panel.svg';
+        imageUrl = '/assets/text_to_speech_panel.svg';
         message = 'テキストを音声に変換しよう';
         break;
 
       case 'speech_to_text':
-        imageUrl = '/speech_to_text_panel.svg';
+        imageUrl = '/assets/speech_to_text_panel.svg';
         message = '音声をテキストに変換しよう';
         break;
 
       case 'image_analysis':
-        imageUrl = '/image_analysis_panel.svg';
+        imageUrl = '/assets/image_analysis_panel.svg';
         message = '画像を解析しよう';
         break;
     }
