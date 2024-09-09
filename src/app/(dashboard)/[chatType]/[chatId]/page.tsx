@@ -22,7 +22,7 @@ const ChatRoomPage = ({ params }: ChatRoomPageProps) => {
 
   if (!allowedChatType.includes(chatType)) return notFound();
 
-  return <Chat chatId={chatId} />;
+  return <Chat chatId={chatId} chatType={chatType} />;
 };
 
 export default ChatRoomPage;

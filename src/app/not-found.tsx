@@ -7,7 +7,7 @@ export default function NotFound() {
       <div className="relative size-72">
         <Image alt="NotFound" fill src={'/assets/not-found.svg'} />
       </div>
-      <p className="text-center text-sm text-slate-400">
+      <p className="text-center text-sm text-muted-foreground">
         ページが見つかりません
       </p>
       <Link href="/conversation">Conversionページに戻る</Link>

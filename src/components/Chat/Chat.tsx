@@ -4,13 +4,14 @@ import ChatForm from '@/components/Chat/ChatForm';
 import ChatMessage from '@/components/Chat/ChatMessage';
 
 type ChatProps = {
-  chatId: string;
+  chatId?: string;
+  chatType: string;
 };
 
-const Chat = ({ chatId }: ChatProps) => {
+const Chat = ({ chatId, chatType }: ChatProps) => {
   return (
     <>
-      <ChatMessage chatId={chatId} />
+      <ChatMessage chatId={chatId} chatType={chatType} />
       <ChatForm />
     </>
   );

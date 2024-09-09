@@ -19,7 +19,7 @@ const ChatTypePage = ({ params }: ChatTypePageProps) => {
 
   if (!allowedChatType.includes(params.chatType)) return notFound();
 
-  return <Chat />;
+  return <Chat chatType={params.chatType} />;
 };
 
 export default ChatTypePage;
