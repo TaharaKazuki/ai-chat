@@ -1,5 +1,6 @@
 'use client';
 import { zodResolver } from '@hookform/resolvers/zod';
+import console from 'console';
 import { Send } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
@@ -8,7 +9,11 @@ import { Button } from '@/components/ui/button';
 import { Form, FormField, FormItem, FormControl } from '@/components/ui/form';
 import { Textarea } from '@/components/ui/textarea';
 
-const ChatForm = () => {
+type ChatFormProps = {
+  chatId?: string;
+};
+
+const ChatForm = ({ chatId }: ChatFormProps) => {
   const conversationSchema = z.object({
     prompt: z.string().min(1, { message: '1文字以上入力してください。' }),
   });
@@ -22,7 +27,14 @@ const ChatForm = () => {
     },
   });
 
-  const onSubmit = () => {};
+  const onSubmit = ({ prompt }: ConversationSchema) => {
+    try {
+      if (!chatId) {
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div className="bg-white p-3">
