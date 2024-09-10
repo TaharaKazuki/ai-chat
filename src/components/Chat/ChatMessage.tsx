@@ -49,7 +49,7 @@ const ChatMessage = ({ chatId, chatType }: ChatMessageProps) => {
             <div className="flex space-x-4" key={message.id}>
               {message.sender === 'user' ? <UserAvatar /> : <BotAvatar />}
               <div>
-                <div className="whitespace-nowrap break-all rounded-lg bg-white p-4 shadow">
+                <div className="whitespace-pre-wrap break-all rounded-lg bg-white p-4 shadow">
                   <p>{message.content}</p>
                 </div>
               </div>
